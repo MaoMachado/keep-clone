@@ -20,13 +20,14 @@ export const agregarNotas = () => {
   btnGuardarNota.addEventListener('click', () => {
     const titulo = document.getElementById('titulo').value.trim();
     const contenido = document.getElementById('contenido').value.trim();
+    const color = document.getElementById('color').value;
 
     if (!titulo || !contenido) {
       alert('Por favor, completa tanto el título como el contenido de la nota.');
       return;
     }
 
-    const nuevaNota = { titulo, contenido };
+    const nuevaNota = { titulo, contenido, color };
     notas.push(nuevaNota);
     localStorage.setItem('notas', JSON.stringify(notas));
 
@@ -35,11 +36,12 @@ export const agregarNotas = () => {
   })
 
   // ----------------------------------> Crear HTML Nota <-----------------------------------
-  const crearNota = (titulo, contenido, index = null) => {
+  const crearNota = (titulo, contenido, index = null, color = "fff176") => {
     const nota = document.createElement('div');
     nota.classList.add('nota');
     nota.setAttribute('draggable', 'true');
     nota.dataset.index = index;
+    nota.style.backgroundColor = color;
 
     if (titulo) {
       const h3 = document.createElement('h3');
@@ -86,10 +88,10 @@ export const agregarNotas = () => {
   }
 
   // ----------------------------------> Renderizar Notas <-----------------------------------
-  const renderizarNotas = () => {
+  const renderizarNotas = (notasAMostrar = notas) => {
     contenedorNotas.innerHTML = '';
-    notas.forEach((nota, index) => {
-      const elementoNota = crearNota(nota.titulo, nota.contenido, index);
+    notasAMostrar.forEach((nota, index) => {
+      const elementoNota = crearNota(nota.titulo, nota.contenido, index, nota.color);
       contenedorNotas.appendChild(elementoNota);
     });
   }
@@ -98,6 +100,7 @@ export const agregarNotas = () => {
   const limpiarFormulario = () => {
     document.getElementById('titulo').value = '';
     document.getElementById('contenido').value = '';
+    document.getElementById('color').value = '#fff176';
   }
 
   // ----------------------------------> Drag and Drop Contenedor <-----------------------------------
@@ -129,4 +132,15 @@ export const agregarNotas = () => {
     localStorage.setItem('notas', JSON.stringify(notas));
     renderizarNotas();
   });
+
+  // ----------------------------------> Buscar Notas <-----------------------------------
+  const inputBuscar = document.getElementById('buscarNota');
+  inputBuscar.addEventListener('input', () => {
+    const termino = inputBuscar.value.toLowerCase();
+    const notasFiltradas = notas.filter(nota =>
+      nota.titulo.toLowerCase().includes(termino)
+    );
+
+    renderizarNotas(notasFiltradas)
+  })
 }
