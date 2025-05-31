@@ -96,20 +96,25 @@ body {
 
 .contenedor-notas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
   min-block-size: 100px;
 
   & > .nota {
     display: flex;
     flex-direction: column;
-    row-gap: 0.5rem;
+    row-gap: 1rem;
     padding: 1rem;
     background: var(--light);
     color: var(--dark);
     border: 1px solid var(--dark-green);
     border-radius: 1rem;
-    box-shadow: 0 2px 8px var(--light-green);
+    transition: box-shadow 0.2s linear, scale 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 2px 8px var(--light-green);
+      scale: 1.02;
+    }
 
     & > h3 {
       text-align: center;
@@ -117,7 +122,8 @@ body {
     }
 
     & > p {
-      flex-grow: 1;
+      min-block-size: 50px;
+      border-block-end: 2px solid rgba(0, 0, 0, 0.3);
       font-size: 0.9rem;
       line-height: 1.4;
       overflow: hidden;
