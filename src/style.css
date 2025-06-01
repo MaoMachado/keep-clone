@@ -57,25 +57,25 @@ body {
     padding: 1rem;
     border-radius: 0.5rem;
 
-    & > input,
-    textarea {
-      padding: 0.75rem;
-      border: 2px solid var(--dark);
-      border-radius: 0.75rem;
-      font-family: "Roboto Flex", sans-serif;
-      font-style: italic;
-      font-size: 1rem;
-
-      &::placeholder {
-        opacity: 0.7;
-      }
-    }
-
     & > .color_container {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 1rem;
+      inline-size: fit-content;
+      margin: auto;
+      padding: 0.5rem;
+      background-color: rgba(0, 0, 0, 0.3);
+
+      & > label {
+        font-weight: bold;
+      }
+
+      & > input {
+        border: none;
+        background: transparent;
+        border-radius: 1rem;
+      }
     }
 
     & button {
@@ -103,7 +103,7 @@ body {
       display: flex;
       position: absolute;
       right: 0;
-      top: 275px;
+      top: 400px;
       padding: 0.5rem;
       background: var(--light);
       border-radius: 0.5rem;
@@ -185,4 +185,46 @@ body {
       transition: transform 0.2s ease-in-out;
     }
   }
+}
+
+.campo {
+  position: relative;
+  margin-block-end: 1.5rem;
+
+  & > input,
+  textarea {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 1rem;
+    border: none;
+    outline: 1px solid var(--lime-50);
+    border-radius: 0.6rem;
+    background: transparent;
+    color: var(--light);
+    font-size: 1rem;
+    font-family: "Roboto Flex", sans-serif;
+  }
+
+  & > label {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    color: #999;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.campo input:focus + label,
+.campo textarea:focus + label,
+.campo input:valid + label,
+.campo textarea:valid + label {
+  top: -15px;
+  left: 10px;
+  font-size: 0.75rem;
+  color: #555;
+  border-radius: 0.5rem;
+  background: var(--light);
+  padding: 0.2rem;
 }

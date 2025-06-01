@@ -8,13 +8,19 @@ document.querySelector('#app').innerHTML = `
       <h1>Keep Clone</h1>
     </header>
     <section class="nueva-nota">
-      <input type="text" placeholder="Titulo Nota..." id="titulo" />
-      <textarea placeholder="Escribe la nota..." id="contenido"></textarea>
-      <div class="color_container">
-        <label for="color">Color:</label>
-        <input type="color" id="color" value="#fff176" />
-        <button id="guardarNota">Guardar Nota</button>
+      <div class="campo">
+        <input type="text" id="titulo" required />
+        <label for="titulo">Titulo Nota...</label>
       </div>
+      <div class="campo">
+        <textarea id="contenido" required></textarea>
+        <label for="contenido">Contenido de la Nota</label>
+      </div>
+      <div class="color_container">
+        <label for="color">Color de la Nota:</label>
+        <input type="color" id="color" value="#fff176" />
+      </div>
+      <button id="guardarNota">Guardar Nota</button>
       <div class="buscar_container">
         <input type="text" id="buscarNota" class="buscar_nota" placeholder="Busca la nota" />
         <img src="${iconoBuscar}" alt="Icono de buscar una nota" />
