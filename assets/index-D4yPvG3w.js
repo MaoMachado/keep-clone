@@ -1,9 +1,13 @@
 (function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))m(t);new MutationObserver(t=>{for(const o of t)if(o.type==="childList")for(const u of o.addedNodes)u.tagName==="LINK"&&u.rel==="modulepreload"&&m(u)}).observe(document,{childList:!0,subtree:!0});function s(t){const o={};return t.integrity&&(o.integrity=t.integrity),t.referrerPolicy&&(o.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?o.credentials="include":t.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function m(t){if(t.ep)return;t.ep=!0;const o=s(t);fetch(t.href,o)}})();const g="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20height='24px'%20viewBox='0%20-960%20960%20960'%20width='24px'%20fill='%23e3e3e3'%3e%3cpath%20d='M280-120q-33%200-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0%2033-23.5%2056.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160%200h80v-360h-80v360ZM280-720v520-520Z'/%3e%3c/svg%3e",h=()=>{const p=document.getElementById("guardarNota"),r=document.getElementById("contenedorNotas");let s=[];document.addEventListener("DOMContentLoaded",()=>{const e=localStorage.getItem("notas");e&&(s=JSON.parse(e),o())}),p.addEventListener("click",()=>{const e=document.getElementById("titulo").value.trim(),n=document.getElementById("contenido").value.trim(),c=document.getElementById("color").value;if(!e||!n){alert("Por favor, completa tanto el título como el contenido de la nota.");return}const i={titulo:e,contenido:n,color:c};s.push(i),localStorage.setItem("notas",JSON.stringify(s)),o(),u()});const m=(e,n,c=null,i="fff176")=>{const a=document.createElement("div");if(a.classList.add("nota"),a.setAttribute("draggable","true"),a.dataset.index=c,a.style.backgroundColor=i,e){const d=document.createElement("h3");d.textContent=e,a.appendChild(d)}if(n){const d=document.createElement("p");d.textContent=n,a.appendChild(d)}const l=document.createElement("button"),f=document.createElement("img");return f.src=g,l.appendChild(f),l.classList.add("btn_eliminar"),a.appendChild(l),l.addEventListener("click",()=>{t(c)}),a.addEventListener("dragstart",d=>{d.dataTransfer.setData("text/plain",c),a.classList.add("arrastrando")}),a.addEventListener("dragend",()=>{a.classList.remove("arrastrando")}),a},t=e=>{s.splice(e,1),localStorage.setItem("notas",JSON.stringify(s)),o()},o=(e=s)=>{r.innerHTML="",e.forEach((n,c)=>{const i=m(n.titulo,n.contenido,c,n.color);r.appendChild(i)})},u=()=>{document.getElementById("titulo").value="",document.getElementById("contenido").value="",document.getElementById("color").value="#fff176"};r.addEventListener("dragover",e=>{e.preventDefault();const n=document.querySelector(".arrastrando"),i=[...r.querySelectorAll(".nota:not(.arrastrando)")].find(a=>{const l=a.getBoundingClientRect();return e.clientY<l.top+l.height/2});i?r.insertBefore(n,i):r.appendChild(n)}),r.addEventListener("drop",()=>{const e=[];r.querySelectorAll(".nota").forEach(n=>{const c=n.dataset.index;e.push(s[c])}),s=e,localStorage.setItem("notas",JSON.stringify(s)),o()});const v=document.getElementById("buscarNota");v.addEventListener("input",()=>{const e=v.value.toLowerCase(),n=s.filter(c=>c.titulo.toLowerCase().includes(e));o(n)})},y="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20height='24px'%20viewBox='0%20-960%20960%20960'%20width='24px'%20fill='%23e3e3e3'%3e%3cpath%20d='M784-120%20532-372q-30%2024-69%2038t-83%2014q-109%200-184.5-75.5T120-580q0-109%2075.5-184.5T380-840q109%200%20184.5%2075.5T640-580q0%2044-14%2083t-38%2069l252%20252-56%2056ZM380-400q75%200%20127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75%200-127.5%2052.5T200-580q0%2075%2052.5%20127.5T380-400Z'/%3e%3c/svg%3e";document.querySelector("#app").innerHTML=`
   <div class="keep-container">
-    <header>
-      <h1>Keep Clone</h1>
-    </header>
     <section class="nueva-nota">
+      <div class="buscar_container">
+        <input type="text" id="buscarNota" class="buscar_nota" placeholder="Busca la nota" />
+        <img src="${y}" alt="Icono de buscar una nota" />
+      </div>
+      <header>
+        <h1>Keep Clone</h1>
+      </header>
       <div class="campo">
         <input type="text" id="titulo" required />
         <label for="titulo">Titulo Nota...</label>
@@ -17,10 +21,6 @@
         <input type="color" id="color" value="#fff176" />
       </div>
       <button id="guardarNota">Guardar Nota</button>
-      <div class="buscar_container">
-        <input type="text" id="buscarNota" class="buscar_nota" placeholder="Busca la nota" />
-        <img src="${y}" alt="Icono de buscar una nota" />
-      </div>
     </section>
     <section id="contenedorNotas" class="contenedor-notas"></section>
   </div>
