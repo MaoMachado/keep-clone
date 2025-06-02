@@ -4,10 +4,14 @@ import iconoBuscar from './assets/icons/search_keep.svg';
 
 document.querySelector('#app').innerHTML = `
   <div class="keep-container">
-    <header>
-      <h1>Keep Clone</h1>
-    </header>
     <section class="nueva-nota">
+      <div class="buscar_container">
+        <input type="text" id="buscarNota" class="buscar_nota" placeholder="Busca la nota" />
+        <img src="${iconoBuscar}" alt="Icono de buscar una nota" />
+      </div>
+      <header>
+        <h1>Keep Clone</h1>
+      </header>
       <div class="campo">
         <input type="text" id="titulo" required />
         <label for="titulo">Titulo Nota...</label>
@@ -21,10 +25,6 @@ document.querySelector('#app').innerHTML = `
         <input type="color" id="color" value="#fff176" />
       </div>
       <button id="guardarNota">Guardar Nota</button>
-      <div class="buscar_container">
-        <input type="text" id="buscarNota" class="buscar_nota" placeholder="Busca la nota" />
-        <img src="${iconoBuscar}" alt="Icono de buscar una nota" />
-      </div>
     </section>
     <section id="contenedorNotas" class="contenedor-notas"></section>
   </div>

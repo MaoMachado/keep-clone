@@ -36,26 +36,26 @@ body {
 }
 
 .keep-container {
-  position: relative;
-  inline-size: var(--block-size);
-  margin: 0 auto;
-
-  & > header {
-    padding: 1rem;
-    background-color: var(--black);
-    text-align: center;
-    margin-top: 1rem;
-    border-radius: 0.5rem;
-  }
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  min-block-size: 100dvh;
 
   & > .nueva-nota {
     display: flex;
-    flex-direction: column;
     gap: 0.5rem;
-    inline-size: clamp(300px, 100vw, 450px);
-    margin: 2rem auto;
+    flex-direction: column;
+    inline-size: clamp(300px, 100%, 350px);
+    margin-inline-start: 0.5rem;
     padding: 1rem;
+    background: var(--black);
     border-radius: 0.5rem;
+
+    & > header {
+      text-align: center;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+    }
 
     & > .color_container {
       display: flex;
@@ -65,7 +65,6 @@ body {
       inline-size: fit-content;
       margin: auto;
       padding: 0.5rem;
-      background-color: rgba(0, 0, 0, 0.3);
 
       & > label {
         font-weight: bold;
@@ -79,7 +78,7 @@ body {
     }
 
     & button {
-      background: var(--black);
+      background: var(--dark);
       color: var(--light);
       padding: 0.5rem 1rem;
       border: none;
@@ -101,13 +100,11 @@ body {
 
     & > .buscar_container {
       display: flex;
-      position: absolute;
-      right: 0;
-      top: 400px;
       padding: 0.5rem;
       background: var(--light);
       border-radius: 0.5rem;
-
+      inline-size: fit-content;
+      margin: auto;
       & > input {
         background-color: transparent;
         border: none;
@@ -127,19 +124,20 @@ body {
 }
 
 .contenedor-notas {
+  flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
-  min-block-size: 100px;
-  padding-block-start: 1rem;
-  border-block-start: 2px solid rgba(0, 0, 0, 0.5);
+  align-content: start;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  block-size: 100dvh;
+  padding: 1rem;
+  background-color: var(--light);
 
   & > .nota {
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
     padding: 1rem;
-    background: var(--light);
     color: var(--dark);
     border: 1px solid var(--dark-green);
     border-radius: 1rem;
@@ -189,7 +187,6 @@ body {
 
 .campo {
   position: relative;
-  margin-block-end: 1.5rem;
 
   & > input,
   textarea {
@@ -197,7 +194,7 @@ body {
     padding: 12px 10px;
     font-size: 1rem;
     border: none;
-    outline: 1px solid var(--lime-50);
+    outline: 2px solid var(--lime-50);
     border-radius: 0.6rem;
     background: transparent;
     color: var(--light);
